@@ -2,25 +2,25 @@ disabled = false
 locale = "zh-cn"
 label = "简体中文"
 weight = 1
-title = "我的个人博客"
+title = "Aether's Blog"
 
 [params]
   displayName = "ZH-CN"
   isoCode = "zh-CN"
   rtl = false
-  dateFormat = "2006年1月2日"
+  dateFormat = "2006-01-02"
   # logo = "img/logo.png"
   # secondaryLogo = "img/secondary-logo.png"
   description = "记录学习、技术、项目与思考"
-  # copyright = "Copy, _right?_ :thinking_face:"
+  copyright = "© { year } Aether"
 
 [params.author]
-name = "小母鸡"
-email = "08251815@cumt.edu.cn"
+name = "Aether"
+email = "xiaomuji233@gmail.com"
 #   image = "img/blowfish_logo.png"
 #   imageQuality = 96
-headline = "the road from hen to phoenix"
-bio = "学习HPC、AI infra、算法与更多有趣的东西!"
+headline = "Exploring the universe of computer science and navigating the galaxy of artificial intelligence!"
+bio = "Passionate about HPC, AI Infra, algorithms, astronomy, and everything in my life!"
 links = [
 #     { email = "mailto:hello@your_domain.com" },
 #     { link = "https://link-to-some-website.com/" },

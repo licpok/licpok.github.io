@@ -1,158 +1,425 @@
 # -- Theme Options --
-# These options control how the theme functions and allow you to
-# customise the display of your website.
-#
-# Refer to the theme docs for more details about each of these parameters.
+# Blowfish theme configuration
 # https://blowfish.page/docs/configuration/#theme-parameters
 
-colorScheme = "blowfish"
-defaultAppearance = "light" # valid options: light or dark
-autoSwitchAppearance = true
+hasCJKLanguage = true
+# -- Global appearance --
 
+# 使用低饱和灰蓝、冷青配色，比 neon 或 princess 更安静耐看
+colorScheme = "noir"
+
+# 默认进入深色模式，建立星空氛围
+defaultAppearance = "dark"
+
+# 不跟随访客操作系统，保证首次访问默认是深色
+# 访客仍然可以使用页脚切换器改成浅色
+autoSwitchAppearance = false
+
+
+# -- Global features --
+
+# 无障碍模式按钮
 enableA11y = false
-enableSearch = true
-enableCodeCopy = true
-enableStructuredBreadcrumbs = false
-# enableStyledScrollbar = true # disable to use native scrollbar style (defaults to true)
 
+# 启用站内搜索
+enableSearch = true
+
+# 为代码块提供复制按钮
+enableCodeCopy = true
+
+# 暂不生成结构化面包屑，避免与复杂 URL 配置冲突
+enableStructuredBreadcrumbs = false
+
+# 使用 Blowfish 风格的滚动条
+enableStyledScrollbar = true
+
+# 关闭文章末尾的邮件回复入口
 replyByEmail = false
 
+# 首页最近文章只从 posts 分区获取
 mainSections = ["posts"]
-# robots = ""
 
+# 可选的页面级搜索引擎指令
+# robots = "index, follow"
+
+
+# -- Image handling --
+
+# 保留正文图片点击放大功能
+disableImageZoom = false
+
+# 让 Hugo 继续优化特色图、背景图和其他资源图片
 disableImageOptimization = false
+
+# 让 Hugo 继续优化 Markdown 中插入的图片
 disableImageOptimizationMD = false
+
+# 页头继续显示网站文字标题
 disableTextInHeader = false
-# backgroundImageWidth = 1200
 
-# defaultBackgroundImage = "IMAGE.jpg" # used as default for background images
-# defaultFeaturedImage = "IMAGE.jpg" # used as default for featured images in all articles
-# defaultSocialImage = "/android-chrome-512x512.png" # used as default for social media sharing (Open Graph and Twitter)
+# 背景图生成宽度
+# 1920px 足以覆盖大多数桌面屏幕，同时避免原图过大
+backgroundImageWidth = 1920
+
+# 首页默认背景图
+# 文件实际位置：assets/img/sombrero-galaxy.jpg
+defaultBackgroundImage = "img/sombrero-galaxy.jpg"
+
+# 不为所有文章重复使用相同的银河特色图
+# 推荐以后为重要文章单独放置 featured.jpg
+# defaultFeaturedImage = "img/default-featured.jpg"
+
+# 文章没有特色图时，社交媒体分享使用这张图片
+defaultSocialImage = "img/sombrero-galaxy.jpg"
+
+# 不直接热链远程特色图，由 Hugo 下载、缓存和处理
 hotlinkFeatureImage = false
-# Thumbnail aspect ratio as a number (e.g., "1.5", "1.0", "1.777")
-# thumbnailAspectRatio = "1.5"
-# imagePosition = "50% 50%"
 
-# highlightCurrentMenuArea = true
+# 卡片图片使用接近 16:9 的比例
+thumbnailAspectRatio = "1.777"
+
+# 背景图保持水平、垂直居中
+imagePosition = "50% 50%"
+
+
+# -- Navigation and table of contents --
+
+# 高亮当前所在的菜单区域
+highlightCurrentMenuArea = true
+
+# 滚动文章时高亮当前目录项
 smartTOC = true
+
+# 保留全部目录层级，避免目录跳动过多
 smartTOCHideUnfocusedChildren = false
 
-fingerprintAlgorithm = "sha512" # Valid values are "sha512" (default), "sha384", "sha256"
+
+# -- Asset fingerprinting --
+
+fingerprintAlgorithm = "sha512"
+
+
+# -- Repository shortcodes --
 
 giteaDefaultServer = "https://git.fsfe.org"
 forgejoDefaultServer = "https://v11.next.forgejo.org"
 
+
+# -- Language redirect --
+
 [languageRedirect]
-  enabled = false # Enable client-side language redirects for multilingual sites.
-  storageKey = "blowfish_preferred_language" # localStorage key for manual language selections.
-  # fallbackLanguage = "" # Language to use when no browser language matches. Defaults to Hugo's default content language.
-  browserRedirectHomeOnly = true # Restrict browser-language redirects to home pages.
-  storedLanguageRedirect = true # Redirect to the stored language when a matching translation exists.
+  # 当前只有中文站点，不需要根据浏览器语言跳转
+  enabled = false
+
+  # 浏览器保存语言偏好时使用的 localStorage 键
+  storageKey = "blowfish_preferred_language"
+
+  # 将来增加英文站点时的备用语言
+  fallbackLanguage = "zh-cn"
+
+  # 将来开启时，仅在首页执行浏览器语言跳转
+  browserRedirectHomeOnly = true
+
+  # 优先使用访客之前主动选择的语言
+  storedLanguageRedirect = true
+
+
+# -- SEO --
 
 [seo]
-# metaDescriptionOrder = ["summary", "description", "site"] # Controls the fallback order for the HTML meta description. Valid values are "summary", "description", and "site".
+  # 优先使用文章 Front Matter 中的 description
+  # 其次使用 summary，最后使用全站 description
+  metaDescriptionOrder = ["description", "summary", "site"]
+
+
+# -- Header --
 
 [header]
-  layout = "basic" # valid options: basic, fixed, fixed-fill, fixed-gradient, fixed-fill-blur
+  # 固定、带填充与模糊效果的页头
+  # 与背景图结合时形成低调的玻璃质感
+  layout = "fixed-fill-blur"
+
+
+# -- Footer --
 
 [footer]
+  # 只有 menus.zh-cn.toml 中配置了 [[footer]] 后才会显示具体菜单
   showMenu = true
+
+  # 显示版权信息
   showCopyright = true
+
+  # 保留 Hugo/Blowfish 主题署名
   showThemeAttribution = true
+
+  # 允许访客切换深色与浅色模式
   showAppearanceSwitcher = true
+
+  # 显示返回顶部按钮
   showScrollToTop = true
 
+
+# -- Homepage --
+
 [homepage]
-  layout = "profile" # valid options: page, profile, hero, card, background, custom
-  #homepageImage = "IMAGE.jpg" # used in: hero, and card
+  # 使用全屏背景式首页
+  layout = "background"
+
+  # background 布局主要使用全局 defaultBackgroundImage
+  # 这里不再单独指定，避免出现两套背景
+  # homepageImage = "img/sombrero-galaxy.jpg"
+
+  # 显示最近文章
   showRecent = true
+
+  # 首页只展示三篇，避免破坏背景的留白感
   showRecentItems = 3
+
+  # 显示“查看更多文章”
   showMoreLink = true
+
+  # “查看更多”链接目标
   showMoreLinkDest = "/posts/"
-  cardView = true
+
+  # 首页最近文章使用简洁的纵向列表
+  # 避免背景图和图片卡片同时争夺注意力
+  cardView = false
+
+  # 不把文章区域扩展到全屏
   cardViewScreenWidth = false
-  layoutBackgroundBlur = false # only used when layout equals background
-  disableHeroImageFilter = false # only used when layout equals hero
+
+  # 向下滚动时逐渐模糊背景，提高正文可读性
+  layoutBackgroundBlur = true
+
+  # 保留主题对 Hero 图片的滤镜
+  disableHeroImageFilter = false
+
+
+# -- Individual articles --
 
 [article]
+  # 显示发布日期
   showDate = true
-  showViews = true
-  showLikes = true
-  showDateOnlyInArticle = true
+
+  # Firebase 尚未配置，因此先关闭阅读量
+  showViews = false
+
+  # Firebase 尚未配置，因此先关闭点赞
+  showLikes = false
+
+  # false 表示日期也会出现在文章列表中
+  showDateOnlyInArticle = false
+
+  # 显示最后更新时间
   showDateUpdated = true
+
+  # 显示作者资料
   showAuthor = true
-  # showAuthorBottom = false
+
+  # 将作者资料放在正文末尾，使文章标题区更简洁
+  showAuthorBottom = true
+
+  # 全局不显示文章大图，维持安静的阅读环境
+  # 天文类文章可以在自己的 Front Matter 中单独开启
   showHero = false
-  # heroStyle = "basic" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
-  layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
+
+  # 单篇文章开启 Hero 时的默认样式
+  heroStyle = "basic"
+
+  # 仅在 background 或 thumbAndBackground Hero 中使用
+  layoutBackgroundBlur = true
+
+  # 仅在 background Hero 中使用
+  layoutBackgroundHeaderSpace = true
+
+  # 文章页不显示面包屑
   showBreadcrumbs = false
+
+  # 本地预览草稿时显示草稿标签
   showDraftLabel = true
+
+  # 不显示“编辑此页”
   showEdit = false
-  # editURL = "https://github.com/username/repo/"
+
+  # 如果以后开启 showEdit，可以填写 GitHub 编辑地址
+  # editURL = "https://github.com/licpok/licpok.github.io/edit/main/"
+
+  # 自动追加当前文章路径
   editAppendPath = true
+
+  # 系列文章模块默认收起
   seriesOpened = false
+
+  # 显示标题锚点
   showHeadingAnchors = true
+
+  # 显示上一篇、下一篇
   showPagination = true
+
+  # 保持默认的上一篇、下一篇方向
   invertPagination = false
+
+  # 显示预计阅读时间
   showReadingTime = true
-  showTableOfContents = false
-  # showRelatedContent = false
-  # relatedContentLimit = 3
-  showTaxonomies = true # Enable the display of taxonomies for the related article.
-  showCategories = true # These will show if showTaxonomies is true.
-  showTags = true # These will show if showTaxonomies is true.
-  showCategoriesInSecondaryColor = false # This will change the color of category badges, so the user can better distinguish between the two. Only if showTaxonomies is true.
+
+  # 技术文章全局显示目录
+  showTableOfContents = true
+
+  # 显示相关文章
+  # 你的 hugo.toml 已经配置了 related 索引
+  showRelatedContent = true
+
+  # 最多展示三篇相关文章
+  relatedContentLimit = 3
+
+  # 显示分类和标签
+  showTaxonomies = true
+
+  # 显示文章分类
+  showCategories = true
+
+  # 显示文章标签
+  showTags = true
+
+  # 分类使用 noir 的冷青次要色，与普通标签形成轻微区别
+  showCategoriesInSecondaryColor = true
+
+  # 单作者博客不显示多作者徽章
   showAuthorsBadges = false
+
+  # 显示字数
   showWordCount = true
-  # sharingLinks = [ "linkedin", "twitter", "bluesky", "mastodon", "reddit", "pinterest", "facebook", "email", "whatsapp", "telegram", "line"]
-  showZenMode = false
-  # externalLinkForceNewTab = false # disable to allow external links in the same tab (defaults to true)
+
+  # 当前没有评论系统
+  showComments = false
+
+  # 暂不显示大量社交分享按钮
+  # sharingLinks = ["email", "linkedin", "telegram"]
+
+  # 提供专注阅读的禅模式
+  showZenMode = true
+
+  # Markdown 外部链接在新标签页打开
+  externalLinkForceNewTab = true
+
+
+# -- Section lists, such as /posts/ --
 
 [list]
+  # 列表页不显示大幅 Hero
   showHero = false
-  # heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
-  layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
+
+  # 将来单独开启时采用基础 Hero
+  heroStyle = "basic"
+
+  # 只在背景式 Hero 中有效
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = true
+
+  # 文章列表显示面包屑
   showBreadcrumbs = true
+
+  # 显示文章摘要
   showSummary = true
-  showViews = true
+
+  # Firebase 未配置，关闭阅读量
+  showViews = false
+
+  # Firebase 未配置，关闭点赞数
   showLikes = false
+
+  # 不显示列表页自身的目录
   showTableOfContents = false
+
+  # 普通列表项使用有边框的简洁卡片
   showCards = true
+
+  # 使用日期排序，而不是 Front Matter 权重
   orderByWeight = false
+
+  # 按年份组织文章
   groupByYear = true
-  cardView = true
+
+  # 不使用多列图片网格，降低视觉密度
+  cardView = false
+
+  # 不扩展到整个浏览器宽度
   cardViewScreenWidth = false
-  constrainItemsWidth = false
+
+  # 限制文章列表宽度，提高阅读舒适度
+  constrainItemsWidth = true
+
+
+# -- Sitemap --
 
 [sitemap]
+  # 不把 taxonomy 与 term 页面写入 sitemap
   excludedKinds = ["taxonomy", "term"]
 
+
+# -- Taxonomy overview pages --
+# 例如 /categories/ 和 /tags/
+
 [taxonomy]
+  # 显示每个分类或标签下的文章数量
   showTermCount = true
+
+  # 不显示分类汇总页 Hero
   showHero = false
-  # heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
-  layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
+  heroStyle = "basic"
+
+  # 只在背景式 Hero 中有效
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = true
+
+  # 不显示面包屑
   showBreadcrumbs = false
+
+  # 不显示统计信息
   showViews = false
   showLikes = false
+
+  # 不显示目录
   showTableOfContents = false
+
+  # 分类名称使用简洁列表
   cardView = false
 
+
+# -- Individual taxonomy term pages --
+# 例如 /categories/astronomy/
+
 [term]
+  # 不显示 Hero
   showHero = false
-  # heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
-  layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
-  layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
+  heroStyle = "basic"
+
+  # 只在背景式 Hero 中有效
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = true
+
+  # 不显示面包屑
   showBreadcrumbs = false
+
+  # 不显示统计信息
   showViews = false
   showLikes = false
-  showTableOfContents = true
+
+  # 不显示 Term 页面自身的目录
+  showTableOfContents = false
+
+  # 分类下文章不按年份分组
   groupByYear = false
+
+  # 使用简洁文章列表
   cardView = false
+
+  # 不扩展到全屏
   cardViewScreenWidth = false
+
+
+# -- Firebase --
+# 配置后可开启 article.showViews 和 article.showLikes
 
 [firebase]
   # apiKey = "XXXXXX"
@@ -163,27 +430,42 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   # appId = "XXXXXX"
   # measurementId = "XXXXXX"
 
+
+# -- Fathom Analytics --
+
 [fathomAnalytics]
   # site = "ABC12345"
-  # domain = "llama.yoursite.com"
+  # domain = "analytics.example.com"
+
+
+# -- Umami Analytics --
 
 [umamiAnalytics]
   # websiteid = "ABC12345"
-  # domain = "llama.yoursite.com"
-  # dataDomains = "yoursite.com,yoursite2.com"
-  # scriptName = ""
+  # domain = "analytics.example.com"
+  # dataDomains = "licpok.github.io"
+  # scriptName = "script.js"
   # enableTrackEvent = true
+
+
+# -- Seline Analytics --
 
 [selineAnalytics]
   # token = "XXXXXX"
   # enableTrackEvent = true
 
+
+# -- Buy Me a Coffee --
+
 [buymeacoffee]
   # identifier = ""
-  # globalWidget = true
-  # globalWidgetMessage = "Hello"
-  # globalWidgetColor = "#FFDD00"
+  # globalWidget = false
+  # globalWidgetMessage = ""
+  # globalWidgetColor = "#334155"
   # globalWidgetPosition = "right"
+
+
+# -- Site verification --
 
 [verification]
   # google = ""
@@ -192,9 +474,15 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   # yandex = ""
   # fediverse = ""
 
+
+# -- RSSNext / Follow --
+
 [rssnext]
   # feedId = ""
   # userId = ""
+
+
+# -- Advertisement --
 
 [advertisement]
   # adsense = ""
