@@ -1,7 +1,7 @@
 +++
 title = "我的第一篇博客"
 date = 2026-08-12
-draft = false 
+draft = true
 description = "测试 Hugo 与 Blowfish 的文章系统"
 tags = ["Hugo", "Blowfish"]
 categories = ["博客搭建"]

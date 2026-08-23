@@ -1,8 +1,13 @@
 +++
 title = "About"
-date = 2026-8-12
+date = 2026-08-12
 description = "关于我"
 draft = false
+
+showDate = false
+showDateUpdated = false
+showReadingTime = false
+showWordCount = false
 +++
 
 欢迎来到我的博客！
